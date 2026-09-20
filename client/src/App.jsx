@@ -1,15 +1,28 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Menu from './pages/Menu';
+import Cart from './pages/Cart';
+import Login from './pages/Login';
+import KitchenDashboard from './pages/KitchenDashboard';
 
 function App() {
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="p-8 bg-white shadow-xl rounded-2xl text-center">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">
-          React & Tailwind are working! 🍔
-        </h1>
-        <p className="text-gray-600">Smart Canteen System Frontend Initialized.</p>
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        {/* Navbar stays at the top of every page */}
+        <Navbar />
+        
+        {/* Main content changes based on the URL */}
+        <main className="flex-grow max-w-6xl mx-auto w-full">
+          <Routes>
+            <Route path="/" element={<Menu />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/kitchen" element={<KitchenDashboard />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </Router>
   );
 }
 

@@ -9,11 +9,9 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        {/* Navbar stays at the top of every page */}
         <Navbar />
-        
-        {/* Main content changes based on the URL */}
-        <main className="flex-grow max-w-6xl mx-auto w-full">
+
+        <main className="flex-grow max-w-6xl mx-auto w-full px-4 py-8">
           <Routes>
             <Route path="/" element={<Menu />} />
             <Route path="/cart" element={<Cart />} />

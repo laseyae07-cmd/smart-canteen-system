@@ -77,11 +77,36 @@ app.post('/api/orders', protect, async (req, res) => {
 // GET /api/orders - Protected + Admin: Only staff can view ALL orders for the kitchen dashboard
 app.get('/api/orders', protect, admin, async (req, res) => {
   try {
-    // .populate('user', 'name') fetches the user's name from the User collection using their ID
     const orders = await Order.find().populate('user', 'name').sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: 'Server error fetching orders' });
+  }
+});
+
+// PUT /api/orders/:id/status - Protected + Admin: Update an order status from the kitchen dashboard
+app.put('/api/orders/:id/status', protect, admin, async (req, res) => {
+  try {
+    const { status } = req.body;
+    const validStatuses = ['pending', 'preparing', 'ready', 'completed', 'cancelled'];
+
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ message: 'Invalid order status' });
+    }
+
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    ).populate('user', 'name');
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error updating order status' });
   }
 });
 

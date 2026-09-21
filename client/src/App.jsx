@@ -4,7 +4,10 @@ import Menu from './pages/Menu';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import KitchenDashboard from './pages/KitchenDashboard';
+import StaffDashboard from './pages/StaffDashboard';
+import StudentDashboard from './pages/StudentDashboard';
 import AdminMenu from './pages/AdminMenu';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -17,8 +20,38 @@ function App() {
             <Route path="/" element={<Menu />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/kitchen" element={<KitchenDashboard />} />
-            <Route path="/admin-menu" element={<AdminMenu />} />
+            <Route
+              path="/student-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <StudentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/staff-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['staff']}>
+                  <StaffDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/kitchen"
+              element={
+                <ProtectedRoute allowedRoles={['staff']}>
+                  <KitchenDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin-menu"
+              element={
+                <ProtectedRoute allowedRoles={['staff']}>
+                  <AdminMenu />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>

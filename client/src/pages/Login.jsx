@@ -44,7 +44,7 @@ const Login = () => {
       }
 
       login(response.data.user, response.data.token);
-      navigate('/');
+      navigate(response.data.user.role === 'staff' ? '/staff-dashboard' : '/student-dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong.');
     } finally {

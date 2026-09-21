@@ -4,6 +4,7 @@ import Menu from './pages/Menu';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import KitchenDashboard from './pages/KitchenDashboard';
+import AdminMenu from './pages/AdminMenu';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/kitchen" element={<KitchenDashboard />} />
+            <Route path="/admin-menu" element={<AdminMenu />} />
           </Routes>
         </main>
       </div>

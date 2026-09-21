@@ -30,6 +30,7 @@ const Navbar = () => {
             )}
           </Link>
           <Link to="/kitchen" className="hover:text-blue-200 transition">Kitchen</Link>
+          <Link to="/admin-menu" className="hover:text-blue-200 transition">Admin Menu</Link>
 
           {user ? (
             <>
